@@ -43,7 +43,7 @@ router.get('/:id', ({params: {id}}, res) => {
 router.post('/', (req, res) => {
     db('accounts').insert(req.body)
     .then(post => {
-        res.status(201).json({message: `successfully added account`}, post)
+        res.status(201).json({message: `successfully added account`, post})
     })
     .catch(err => {
         res.status(500).json({message: `Something went wrong... ${err}`})
@@ -61,15 +61,13 @@ router.put('/:id', (req, res) => {
         if (post.length === 0) {
             res.status(404).json({message: `invalid id`})
         } else {
-            res.status(201).json({message: `successfully updated`}, post)
+            res.status(204).json({message: `successfully updated`, post})
         }
     })
     .catch(err => {
         res.status(500).json({message: `Something went wrong... ${err}`})
     })
 })
-
-
 
 
 //DELETE
@@ -80,7 +78,7 @@ router.delete('/:id', ({params: {id}}, res) => {
         if (post.length === 0) {
             res.status(404).json({message: `invalid id`})
         } else {
-            res.status(200).json({message: `successfully deleted`}, post)
+            res.status(200).json({message: `successfully deleted`, post})
         }
     })
     .catch(err => {
@@ -90,6 +88,6 @@ router.delete('/:id', ({params: {id}}, res) => {
 
 
 
-//EXPORTS / MIDDLEWARE
+//EXPORTS 
 
 module.exports = router;
